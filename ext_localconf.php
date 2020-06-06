@@ -1,12 +1,22 @@
 <?php
 defined('TYPO3_MODE') || die();
 
-/***************
- * Add default RTE configuration
- */
-$GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['t3_translator'] = 'EXT:t3_translator/Configuration/RTE/Default.yaml';
+call_user_func(function() {
+    $translationServiceRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\Beflo\T3Translator\TranslationService\TranslationServiceRegistry::class);
+    $translationServiceRegistry->registerTranslationService(
+            \Beflo\T3Translator\TranslationService\Service\GoogleTranslationService::class,
+            'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:translation_services.google.name',
+            'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:translation_services.google.description'
+        )
+        ->registerTranslationService(
+            \Beflo\T3Translator\TranslationService\Service\MicrosoftTranslationService::class,
+            'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:translation_services.microsoft.name',
+            'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:translation_services.microsoft.description'
+        );
 
-/***************
- * PageTS
- */
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:t3_translator/Configuration/TsConfig/Page/All.tsconfig">');
+    $authenticationRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\Beflo\T3Translator\Authentication\AuthenticationRegistry::class);
+    $authenticationRegistry->registerTranslationService(
+        \Beflo\T3Translator\Authentication\Service\BasicAuthentication::class,
+        'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:authentication_services.basic_authentication.label'
+    );
+});

@@ -2,6 +2,21 @@
 <xliff version="1.0">
     <file source-language="en" datatype="plaintext" original="messages" date="2020-06-06UTC21:25:050">
         <body>
+            <trans-unit id="translation_services.google.name">
+                <source>Google: Cloud Translation</source>
+            </trans-unit>
+            <trans-unit id="translation_services.google.description">
+                <source>Translation enables organizations to dynamically translate between languages using Google’s pre-trained or custom machine learning models.</source>
+            </trans-unit>
+            <trans-unit id="translation_services.microsoft.name">
+                <source>Microsoft: Translator</source>
+            </trans-unit>
+            <trans-unit id="translation_services.microsoft.description">
+                <source>Translate text in real time across more than 60 languages, powered by the latest innovations in machine translation. Support a wide range of use cases, such as translation for call centers, multilingual conversational agents, or in-app communication.</source>
+            </trans-unit>
+            <trans-unit id="authentication_services.basic_authentication.label">
+                <source>Basic authentication</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

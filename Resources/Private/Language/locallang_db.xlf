@@ -2,6 +2,31 @@
 <xliff version="1.0">
     <file source-language="en" datatype="plaintext" original="messages" date="2020-06-06UTC21:25:050">
         <body>
+            <trans-unit id="sys_language.translator.label">
+                <source>Translation service</source>
+            </trans-unit>
+            <trans-unit id="sys_language.translator.items.none">
+                <source>Choose a translation service for this language</source>
+            </trans-unit>
+
+            <trans-unit id="tx_t3translator_service.title">
+                <source>Translation service</source>
+            </trans-unit>
+            <trans-unit id="tx_t3translator_service.service.label">
+                <source>Service</source>
+            </trans-unit>
+            <trans-unit id="tx_t3translator_service.service.items.none">
+                <source>Choose service</source>
+            </trans-unit>
+            <trans-unit id="tx_t3translator_service.username.label">
+                <source>Username</source>
+            </trans-unit>
+            <trans-unit id="tx_t3translator_service.password.label">
+                <source>Password</source>
+            </trans-unit>
+            <trans-unit id="tx_t3translator_service.api_key.label">
+                <source>API-Key</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>
