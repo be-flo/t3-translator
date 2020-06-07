@@ -32,6 +32,11 @@ class TranslationServiceMeta
     private $class;
 
     /**
+     * @var TranslationServiceInterface
+     */
+    private $object;
+
+    /**
      * TranslationServiceMeta constructor.
      *
      * @param array $config
@@ -125,6 +130,10 @@ class TranslationServiceMeta
      */
     public function getObject()
     {
-        return GeneralUtility::makeInstance($this->class);
+        if(empty($this->object)) {
+            $this->object = GeneralUtility::makeInstance($this->class);
+        }
+
+        return $this->object;
     }
 }

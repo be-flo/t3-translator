@@ -19,4 +19,8 @@ call_user_func(function() {
         \Beflo\T3Translator\Authentication\Service\BasicAuthentication::class,
         'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:authentication_services.basic_authentication.label'
     );
+
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processTranslateToClass'][] = \Beflo\T3Translator\Hook\DataHandlerHook::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = \Beflo\T3Translator\Hook\DataHandlerHook::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][] = \Beflo\T3Translator\Hook\DataHandlerHook::class;
 });

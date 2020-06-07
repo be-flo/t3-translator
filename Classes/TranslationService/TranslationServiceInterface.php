@@ -15,4 +15,29 @@ interface TranslationServiceInterface
      * @return \SplObjectStorage|AuthenticationMeta[]
      */
     public function getAvailableAuthentications(): \SplObjectStorage;
+
+    /**
+     * @param string $translationValue
+     * @param string $fromIso
+     * @param string $toIso
+     *
+     * @return string
+     */
+    public function translate(string $translationValue, string $fromIso, string $toIso): string;
+
+    /**
+     * @param array  $valuesToTranslate
+     * @param string $fromIso
+     * @param string $toIso
+     *
+     * @return array
+     */
+    public function translateMultiple(array $valuesToTranslate, string $fromIso, string $toIso): array;
+
+    /**
+     * @param array $record
+     *
+     * @return TranslationServiceInterface
+     */
+    public function initializeRecord(array $record): TranslationServiceInterface;
 }
