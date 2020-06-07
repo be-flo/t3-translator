@@ -19,6 +19,7 @@ CREATE TABLE tx_t3translator_service (
     hidden smallint unsigned DEFAULT '0' NOT NULL,
 
     service varchar(255) DEFAULT '' NOT NULL,
+    authentication_type varchar(255) DEFAULT '' NOT NULL,
     username varchar(255) DEFAULT '' NOT NULL,
     password varchar(255) DEFAULT '' NOT NULL,
     api_key text,

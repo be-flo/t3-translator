@@ -5,11 +5,14 @@ namespace Beflo\T3Translator\TranslationService\Service;
 
 
 use Beflo\T3Translator\Authentication\AuthenticationInterface;
+use Beflo\T3Translator\Authentication\AuthenticationRegistry;
 use Beflo\T3Translator\Authentication\Service\BasicAuthentication;
+use Beflo\T3Translator\Domain\Model\Dto\AuthenticationMeta;
 use Beflo\T3Translator\TranslationService\TranslationServiceInterface;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-abstract class AbstractTranslationService implements TranslationServiceInterface
+abstract class AbstractTranslationService implements TranslationServiceInterface, SingletonInterface
 {
 
     /**
@@ -36,15 +39,16 @@ abstract class AbstractTranslationService implements TranslationServiceInterface
     }
 
     /**
-     * @return \SplObjectStorage
+     * @return \SplObjectStorage|AuthenticationMeta[]
      */
     public function getAvailableAuthentications(): \SplObjectStorage
     {
         $result = new \SplObjectStorage();
+        $authenticationRegistry = GeneralUtility::makeInstance(AuthenticationRegistry::class);
         foreach($this->availableAuthentications as $authentication) {
-            $interfaces = class_implements($authentication);
-            if(!empty($interfaces[AuthenticationInterface::class])) {
-                $result->attach(GeneralUtility::makeInstance($authentication));
+            $authenticationMeta = $authenticationRegistry->getAuthentication(md5($authentication));
+            if($authenticationMeta) {
+                $result->attach($authenticationMeta);
             }
         }
 

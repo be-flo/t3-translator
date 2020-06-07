@@ -4,7 +4,9 @@
 namespace Beflo\T3Translator\TranslationService;
 
 
+use Beflo\T3Translator\Domain\Model\Dto\TranslationServiceMeta;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TranslationServiceRegistry implements SingletonInterface
 {
@@ -41,20 +43,29 @@ class TranslationServiceRegistry implements SingletonInterface
     }
 
     /**
-     * @return array
+     * @return \SplObjectStorage|TranslationServiceMeta[]
      */
-    public function getTranslationServices(): array
+    public function getTranslationServices(): \SplObjectStorage
     {
-        return $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['t3_translator']['translationServices'] ?? [];
+        $result = new \SplObjectStorage();
+        foreach($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['t3_translator']['translationServices'] ?? [] as $config) {
+            $result->attach(GeneralUtility::makeInstance(TranslationServiceMeta::class, $config));
+        }
+
+        return $result;
     }
 
     /**
      * @param string $identifier
      *
-     * @return array|null
+     * @return TranslationServiceMeta|null
      */
-    public function getTranslationService(string $identifier): ?array
+    public function getTranslationService(string $identifier): ?TranslationServiceMeta
     {
-        return $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['t3_translator']['translationServices'][$identifier] ?? null;
+        if(!empty($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['t3_translator']['translationServices'][$identifier])) {
+            $dto = GeneralUtility::makeInstance(TranslationServiceMeta::class,
+                $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['t3_translator']['translationServices'][$identifier]);
+        }
+        return  $dto ?? null;
     }
 }

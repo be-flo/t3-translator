@@ -27,7 +27,7 @@ return call_user_func(function(string $table) {
         ],
         'types' => [
             '1' => [
-                'showitem' => 'hidden, service, --palette--;;user_pw, api_key'
+                'showitem' => 'hidden, service, authentication_type, --palette--;;user_pw, api_key'
             ],
         ],
         'palettes' => [
@@ -57,7 +57,22 @@ return call_user_func(function(string $table) {
                     'itemsProcFunc' => \Beflo\T3Translator\TCA\TranslationServiceItemsProcFunc::class . '->getItems',
                     'items' => [
                         [$LLL . 'service.items.none', 0]
-                    ]
+                    ],
+                    'default' => 0
+                ]
+            ],
+            'authentication_type' => [
+                'label' => $LLL . 'authentication_type.label',
+                'onChange' => 'reload',
+                'displayCond' => 'FIELD:service:!=:0',
+                'config' => [
+                    'type' => 'select',
+                    'renderType' => 'selectSingle',
+                    'itemsProcFunc' => \Beflo\T3Translator\TCA\AuthenticationItemsProcFunc::class . '->getItems',
+                    'items' => [
+                        [$LLL . 'authentication_type.items.none', 0]
+                    ],
+                    'default' => 0
                 ]
             ],
             'username' => [

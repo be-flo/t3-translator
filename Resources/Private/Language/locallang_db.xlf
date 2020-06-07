@@ -18,6 +18,12 @@
             <trans-unit id="tx_t3translator_service.service.items.none">
                 <source>Choose service</source>
             </trans-unit>
+            <trans-unit id="tx_t3translator_service.authentication_type.label">
+                <source>Authentication method</source>
+            </trans-unit>
+            <trans-unit id="tx_t3translator_service.authentication_type.items.none">
+                <source>Choose authentication method</source>
+            </trans-unit>
             <trans-unit id="tx_t3translator_service.username.label">
                 <source>Username</source>
             </trans-unit>

@@ -15,7 +15,7 @@ call_user_func(function() {
         );
 
     $authenticationRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\Beflo\T3Translator\Authentication\AuthenticationRegistry::class);
-    $authenticationRegistry->registerTranslationService(
+    $authenticationRegistry->registerAuthentication(
         \Beflo\T3Translator\Authentication\Service\BasicAuthentication::class,
         'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:authentication_services.basic_authentication.label'
     );

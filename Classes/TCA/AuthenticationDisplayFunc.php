@@ -4,6 +4,8 @@
 namespace Beflo\T3Translator\TCA;
 
 
+use Beflo\T3Translator\Authentication\AuthenticationRegistry;
+use Beflo\T3Translator\Domain\Model\Dto\AuthenticationMeta;
 use Beflo\T3Translator\TranslationService\TranslationServiceInterface;
 use Beflo\T3Translator\TranslationService\TranslationServiceRegistry;
 use TYPO3\CMS\Backend\Form\FormDataProvider\EvaluateDisplayConditions;
@@ -13,16 +15,16 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class AuthenticationDisplayFunc implements SingletonInterface
 {
     /**
-     * @var TranslationServiceRegistry
+     * @var AuthenticationRegistry
      */
-    private $translationServiceRegistry;
+    private $authenticationRegistry;
 
     /**
      * AuthenticationDisplayFunc constructor.
      */
     public function __construct()
     {
-        $this->translationServiceRegistry = GeneralUtility::makeInstance(TranslationServiceRegistry::class);
+        $this->authenticationRegistry = GeneralUtility::makeInstance(AuthenticationRegistry::class);
     }
 
     /**
@@ -61,18 +63,15 @@ class AuthenticationDisplayFunc implements SingletonInterface
     /**
      * @param array $record
      *
-     * @return TranslationServiceInterface|null
+     * @return AuthenticationMeta|null
      */
-    private function getTranslationService(array $record): ?TranslationServiceInterface
+    private function getAuthentication(array $record): ?AuthenticationMeta
     {
         $result = null;
-        if(!empty($record['service'][0])) {
-            $serviceConfiguration = $this->translationServiceRegistry->getTranslationService($record['service'][0]);
-            if(!empty($serviceConfiguration['class'])) {
-                $service = GeneralUtility::makeInstance($serviceConfiguration['class']);
-                if($service instanceof TranslationServiceInterface) {
-                    $result = $service;
-                }
+        if(!empty($record['authentication_type'][0])) {
+            $authenticationMeta = $this->authenticationRegistry->getAuthentication($record['authentication_type'][0]);
+            if($authenticationMeta) {
+                $result = $authenticationMeta;
             }
         }
 
@@ -88,15 +87,9 @@ class AuthenticationDisplayFunc implements SingletonInterface
     private function checkForField(array $params, string $fieldName): bool
     {
         $result = false;
-        $service = $this->getTranslationService($params['record']);
-        if ($service) {
-            foreach ($service->getAvailableAuthentications() as $authentication) {
-                $fields = $authentication->getRequiredFields();
-                if (in_array($fieldName, $fields)) {
-                    $result = true;
-                    break;
-                }
-            }
+        $authenticationMeta = $this->getAuthentication($params['record']);
+        if ($authenticationMeta) {
+            $result = in_array($fieldName, $authenticationMeta->getObject()->getRequiredFields());
         }
 
         return $result;
