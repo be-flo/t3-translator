@@ -11,4 +11,4 @@ The TYPO3 Translator extension provides a connection to the following translatio
 
 - Google
 
-:Documentation:  <Documentation/Index.rst>
+The documentation can be found here :ref:`Documentation <Documentation/Index.rst>`
