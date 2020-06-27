@@ -7,18 +7,9 @@ call_user_func(function() {
             \Beflo\T3Translator\TranslationService\Service\GoogleTranslationService::class,
             'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:translation_services.google.name',
             'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:translation_services.google.description'
-        )
-        ->registerTranslationService(
-            \Beflo\T3Translator\TranslationService\Service\MicrosoftTranslationService::class,
-            'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:translation_services.microsoft.name',
-            'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:translation_services.microsoft.description'
         );
 
     $authenticationRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\Beflo\T3Translator\Authentication\AuthenticationRegistry::class);
-    $authenticationRegistry->registerAuthentication(
-        \Beflo\T3Translator\Authentication\Service\BasicAuthentication::class,
-        'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:authentication_services.basic_authentication.label'
-    );
     $authenticationRegistry->registerAuthentication(
         \Beflo\T3Translator\Authentication\Service\ApiKeyAuthentication::class,
         'LLL:EXT:t3_translator/Resources/Private/Language/locallang_be.xlf:authentication_services.api_key.label'

@@ -10,6 +10,7 @@ use Beflo\T3Translator\Domain\Model\Dto\AuthenticationMeta;
 use Beflo\T3Translator\Exception\AuthenticationNotFoundException;
 use Beflo\T3Translator\TranslationService\TranslationServiceInterface;
 use Beflo\T3Translator\TranslationService\TranslationValue;
+use SplObjectStorage;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -67,11 +68,11 @@ abstract class AbstractTranslationService implements TranslationServiceInterface
     }
 
     /**
-     * @return \SplObjectStorage|AuthenticationMeta[]
+     * @return SplObjectStorage|AuthenticationMeta[]
      */
-    public function getAvailableAuthentications(): \SplObjectStorage
+    public function getAvailableAuthentications(): SplObjectStorage
     {
-        $result = new \SplObjectStorage();
+        $result = new SplObjectStorage();
         $authenticationRegistry = GeneralUtility::makeInstance(AuthenticationRegistry::class);
         foreach ($this->availableAuthentications as $authentication) {
             $authenticationMeta = $authenticationRegistry->getAuthentication(md5($authentication));
@@ -120,8 +121,8 @@ abstract class AbstractTranslationService implements TranslationServiceInterface
      */
     public function translateMultiple(array $valuesToTranslate, string $fromIso, string $toIso): array
     {
-        /** @var \SplObjectStorage|TranslationValue[] $translationValues */
-        $translationValues = new \SplObjectStorage();
+        /** @var SplObjectStorage|TranslationValue[] $translationValues */
+        $translationValues = new SplObjectStorage();
         $transArray = [];
         foreach ($valuesToTranslate as $fieldName => $value) {
             $translationValue = GeneralUtility::makeInstance(TranslationValue::class, $value, $fieldName);

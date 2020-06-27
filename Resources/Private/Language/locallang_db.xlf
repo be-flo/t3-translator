@@ -12,6 +12,9 @@
             <trans-unit id="tx_t3translator_service.title">
                 <source>Translation service</source>
             </trans-unit>
+            <trans-unit id="tx_t3translator_service.title.label">
+                <source>Service title</source>
+            </trans-unit>
             <trans-unit id="tx_t3translator_service.service.label">
                 <source>Service</source>
             </trans-unit>

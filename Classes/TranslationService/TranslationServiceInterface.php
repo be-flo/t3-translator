@@ -5,6 +5,7 @@ namespace Beflo\T3Translator\TranslationService;
 
 
 use Beflo\T3Translator\Domain\Model\Dto\AuthenticationMeta;
+use SplObjectStorage;
 
 interface TranslationServiceInterface
 {
@@ -12,9 +13,9 @@ interface TranslationServiceInterface
     /**
      * Return the available authentication methods for the service
      *
-     * @return \SplObjectStorage|AuthenticationMeta[]
+     * @return SplObjectStorage|AuthenticationMeta[]
      */
-    public function getAvailableAuthentications(): \SplObjectStorage;
+    public function getAvailableAuthentications(): SplObjectStorage;
 
     /**
      * @param string $translationValue

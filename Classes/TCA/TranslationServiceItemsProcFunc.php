@@ -19,7 +19,7 @@ class TranslationServiceItemsProcFunc
     {
         $translationServiceRegistry = GeneralUtility::makeInstance(TranslationServiceRegistry::class);
         $availableTranslationServices = $translationServiceRegistry->getTranslationServices();
-        foreach($availableTranslationServices as $translationServiceMeta) {
+        foreach ($availableTranslationServices as $translationServiceMeta) {
             $params['items'][] = [$translationServiceMeta->getName(), $translationServiceMeta->getIdentifier()];
         }
     }

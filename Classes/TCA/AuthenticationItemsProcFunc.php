@@ -16,10 +16,10 @@ class AuthenticationItemsProcFunc
      */
     public function getItems(array $params)
     {
-        if(!empty($params['row'])) {
+        if (!empty($params['row'])) {
             $translationService = $this->getTranslationService($params['row']);
-            if($translationService) {
-                foreach($translationService->getAvailableAuthentications() as $authenticationMeta) {
+            if ($translationService) {
+                foreach ($translationService->getAvailableAuthentications() as $authenticationMeta) {
                     $params['items'][] = [$authenticationMeta->getLabel(), $authenticationMeta->getIdentifier()];
                 }
             }
@@ -34,11 +34,11 @@ class AuthenticationItemsProcFunc
     private function getTranslationService(array $record): ?TranslationServiceInterface
     {
         $result = null;
-        if(!empty($record['service'][0]) && $record['service'][0] !== '0') {
+        if (!empty($record['service'][0]) && $record['service'][0] !== '0') {
             $translationServiceMeta = GeneralUtility::makeInstance(TranslationServiceRegistry::class)
                 ->getTranslationService($record['service'][0]);
             $translationServiceMeta->getClass();
-            if($translationServiceMeta) {
+            if ($translationServiceMeta) {
                 $result = $translationServiceMeta->getObject();
             }
         }

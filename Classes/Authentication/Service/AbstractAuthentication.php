@@ -45,24 +45,12 @@ abstract class AbstractAuthentication implements AuthenticationInterface, Single
     /**
      * @param string $fieldName
      *
-     * @return AbstractAuthentication
-     */
-    protected function addRequiredField(string $fieldName): AbstractAuthentication
-    {
-        $this->requiredFields[$fieldName] = null;
-
-        return $this;
-    }
-
-    /**
-     * @param string $fieldName
-     *
      * @return mixed|null
      */
     public function getRequiredField(string $fieldName)
     {
         $result = null;
-        if(array_key_exists($fieldName, $this->requiredFields)) {
+        if (array_key_exists($fieldName, $this->requiredFields)) {
             $result = $this->requiredFields[$fieldName];
         }
 
@@ -74,9 +62,21 @@ abstract class AbstractAuthentication implements AuthenticationInterface, Single
      */
     public function fillRequiredFields(array $translationServiceRecord): void
     {
-        foreach($this->requiredFields as $fieldName => &$value) {
+        foreach ($this->requiredFields as $fieldName => &$value) {
             $value = $translationServiceRecord[$fieldName] ?? null;
         }
+    }
+
+    /**
+     * @param string $fieldName
+     *
+     * @return AbstractAuthentication
+     */
+    protected function addRequiredField(string $fieldName): AbstractAuthentication
+    {
+        $this->requiredFields[$fieldName] = null;
+
+        return $this;
     }
 
 }

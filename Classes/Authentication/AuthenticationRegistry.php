@@ -5,6 +5,7 @@ namespace Beflo\T3Translator\Authentication;
 
 
 use Beflo\T3Translator\Domain\Model\Dto\AuthenticationMeta;
+use SplObjectStorage;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -40,11 +41,11 @@ class AuthenticationRegistry implements SingletonInterface
     }
 
     /**
-     * @return \SplObjectStorage
+     * @return SplObjectStorage
      */
-    public function getAvailableAuthentication(): \SplObjectStorage
+    public function getAvailableAuthentication(): SplObjectStorage
     {
-        $result = new \SplObjectStorage();
+        $result = new SplObjectStorage();
         foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['t3_translator']['authentications'] ?? [] as $config) {
             $result->attach(GeneralUtility::makeInstance(AuthenticationMeta::class, $config));
         }

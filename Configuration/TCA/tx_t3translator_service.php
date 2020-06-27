@@ -13,7 +13,7 @@ return call_user_func(function(string $table) {
 
     $TCA = [
         'ctrl' => [
-            'label' => 'service',
+            'label' => 'title',
             'tstamp' => 'tstamp',
             'crdate' => 'crdate',
             'cruser_id' => 'cruser_id',
@@ -27,7 +27,7 @@ return call_user_func(function(string $table) {
         ],
         'types' => [
             '1' => [
-                'showitem' => 'hidden, service, authentication_type, --palette--;;user_pw, api_key'
+                'showitem' => 'hidden, title, service, authentication_type, --palette--;;user_pw, api_key'
             ],
         ],
         'palettes' => [
@@ -46,6 +46,13 @@ return call_user_func(function(string $table) {
                             '0' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:hidden.I.0'
                         ]
                     ]
+                ]
+            ],
+            'title' => [
+                'label' => $LLL . 'title.label',
+                'config' => [
+                    'type' => 'input',
+                    'eval' => 'required'
                 ]
             ],
             'service' => [

@@ -6,8 +6,6 @@ namespace Beflo\T3Translator\TCA;
 
 use Beflo\T3Translator\Authentication\AuthenticationRegistry;
 use Beflo\T3Translator\Domain\Model\Dto\AuthenticationMeta;
-use Beflo\T3Translator\TranslationService\TranslationServiceInterface;
-use Beflo\T3Translator\TranslationService\TranslationServiceRegistry;
 use TYPO3\CMS\Backend\Form\FormDataProvider\EvaluateDisplayConditions;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -39,6 +37,41 @@ class AuthenticationDisplayFunc implements SingletonInterface
     }
 
     /**
+     * @param array  $params
+     * @param string $fieldName
+     *
+     * @return bool
+     */
+    private function checkForField(array $params, string $fieldName): bool
+    {
+        $result = false;
+        $authenticationMeta = $this->getAuthentication($params['record']);
+        if ($authenticationMeta) {
+            $result = in_array($fieldName, $authenticationMeta->getObject()->getRequiredFields());
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param array $record
+     *
+     * @return AuthenticationMeta|null
+     */
+    private function getAuthentication(array $record): ?AuthenticationMeta
+    {
+        $result = null;
+        if (!empty($record['authentication_type'][0])) {
+            $authenticationMeta = $this->authenticationRegistry->getAuthentication($record['authentication_type'][0]);
+            if ($authenticationMeta) {
+                $result = $authenticationMeta;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * @param array                     $params
      * @param EvaluateDisplayConditions $pObj
      *
@@ -59,39 +92,4 @@ class AuthenticationDisplayFunc implements SingletonInterface
     {
         return $this->checkForField($params, 'api_key');
     }
-
-    /**
-     * @param array $record
-     *
-     * @return AuthenticationMeta|null
-     */
-    private function getAuthentication(array $record): ?AuthenticationMeta
-    {
-        $result = null;
-        if(!empty($record['authentication_type'][0])) {
-            $authenticationMeta = $this->authenticationRegistry->getAuthentication($record['authentication_type'][0]);
-            if($authenticationMeta) {
-                $result = $authenticationMeta;
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * @param array  $params
-     * @param string $fieldName
-     *
-     * @return bool
-     */
-    private function checkForField(array $params, string $fieldName): bool
-    {
-        $result = false;
-        $authenticationMeta = $this->getAuthentication($params['record']);
-        if ($authenticationMeta) {
-            $result = in_array($fieldName, $authenticationMeta->getObject()->getRequiredFields());
-        }
-
-        return $result;
-}
 }

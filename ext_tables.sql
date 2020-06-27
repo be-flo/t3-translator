@@ -18,6 +18,7 @@ CREATE TABLE tx_t3translator_service (
     deleted smallint unsigned DEFAULT '0' NOT NULL,
     hidden smallint unsigned DEFAULT '0' NOT NULL,
 
+    title varchar(255) DEFAULT '' NOT NULL,
     service varchar(255) DEFAULT '' NOT NULL,
     authentication_type varchar(255) DEFAULT '' NOT NULL,
     username varchar(255) DEFAULT '' NOT NULL,

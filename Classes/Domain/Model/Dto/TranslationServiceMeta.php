@@ -130,7 +130,7 @@ class TranslationServiceMeta
      */
     public function getObject()
     {
-        if(empty($this->object)) {
+        if (empty($this->object)) {
             $this->object = GeneralUtility::makeInstance($this->class);
         }
 
