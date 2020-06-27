@@ -9,27 +9,27 @@
 .. _start:
 
 =============================================================
-Extension Name
+TYPO3 Translator
 =============================================================
 
 :Version:
-   |release|
+   1.0.0
 
 :Language:
    en
 
 :Authors:
-   Your name
+   Florian Peters
 
 :Email:
-   you@domain.tld
+   t3translator@t3tech.de
 
 :License:
    This extension documentation is published under the
    `CC BY-NC-SA 4.0 <https://creativecommons.org/licenses/by-nc-sa/4.0/>`__ (Creative Commons)
    license
 
-{extension.description}
+This extension provide a simple possibility to make real translations within a TYPO3 instance.
 
 **TYPO3**
 
@@ -38,16 +38,16 @@ a GNU/GPL CMS/Framework available from `typo3.org <https://typo3.org/>`_ .
 
 **Community Documentation**
 
-This documentation is community documentation for the TYPO3 extension {extension.name}
+This documentation is community documentation for the TYPO3 extension "t3_translator"
 
 It is maintained as part of this third party extension.
 
 If you find an error or something is missing, please:
-`Report a Problem <https://github.com/TYPO3-Documentation/TYPO3CMS-Example-ExtensionManual/issues/new>`__
+`Report a Problem <https://github.com/be-flo/t3-translator/issues/new>`__
 
 **Extension Manual**
 
-This documentation is for the TYPO3 extension <extkey>.
+This documentation is for the TYPO3 extension "t3_translator".
 
 **For Contributors**
 

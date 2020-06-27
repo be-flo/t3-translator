@@ -6,45 +6,20 @@
 Configuration
 =============
 
-How is the extension configured?
-Aim to provide simple instructions detailing how the extension is configured.
-Always assume that the user has no prior experience of using the extension.
+After installing the extension some small steps are needed to make everything work like expected.
+The extension comes currently with a connection to the google translator. This one is prebuilt and could be used out of
+the box. If you want to use another translation service like the Microsoft Azure Translator you should have a look at
+the developer documentation: `Developer documentation <Documentation/Developer/Index.rst>`__
 
-Try and provide a typical use case for your extension
-and detail each of the steps required to get the extension running.
+Creating a translation service
+==============================
+Use the "List"-Module and navigate in the page tree to the root page. Create a new record and select the Translation service
+within the "T3 Translator" group and fill all fields with the required values.
+For the google translator you would need only an API-Key from your google cloud backend.
 
-Typical Example
-===============
-
-- Does the integrator need to include a static template?
-- For example add a code snippet with comments
-
-Minimal example of TypoScript:
-
-- Code-blocks have support for syntax highlighting
-- Use any supported language
-
-.. code-block:: typoscript
-
-   plugin.tx_myextension.settings {
-      # configure basic email settings
-      email {
-         subject = Some subject
-         from = someemail@domain.de
-      }
-   }
-
-.. _configuration-typoscript:
-
-TypoScript Reference
-====================
-
-Possible subsections: Reference of TypoScript options.
-The construct below show the recommended structure for TypoScript properties listing and description.
-
-When detailing data types or standard TypoScript features,
-don't hesitate to cross-link to the TypoScript Reference as shown below.
-
-See :ref:`h2document:how-to-document-hyperlinks` for information about how to use cross-references.
-
-See the :file:`Settings.cfg` file for the declaration of cross-linking keys.
+Connect the service with a language
+===================================
+When you have created the translation service you need to connect an alternative page language with the translation service.
+This must be done within the "Website Language" record which should be connected with the translation service. In this
+record you have a new select-dropdown with the newly created translation service as possible value.
+Through this implementation is it possible to use different translation services for different languages.
