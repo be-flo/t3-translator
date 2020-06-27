@@ -17,6 +17,9 @@
             <trans-unit id="authentication_services.basic_authentication.label">
                 <source>Basic authentication</source>
             </trans-unit>
+            <trans-unit id="authentication_services.api_key.label">
+                <source>API-Key authentication</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

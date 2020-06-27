@@ -5,9 +5,14 @@ namespace Beflo\T3Translator\Authentication\Service;
 
 
 use Beflo\T3Translator\Authentication\AuthenticationInterface;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
+use TYPO3\CMS\Core\SingletonInterface;
 
-abstract class AbstractAuthentication implements AuthenticationInterface
+abstract class AbstractAuthentication implements AuthenticationInterface, SingletonInterface, LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /**
      * @var array
      */
@@ -34,7 +39,7 @@ abstract class AbstractAuthentication implements AuthenticationInterface
      */
     public function getRequiredFields(): array
     {
-        return $this->requiredFields;
+        return array_keys($this->requiredFields);
     }
 
     /**
@@ -44,9 +49,34 @@ abstract class AbstractAuthentication implements AuthenticationInterface
      */
     protected function addRequiredField(string $fieldName): AbstractAuthentication
     {
-        $this->requiredFields[] = $fieldName;
+        $this->requiredFields[$fieldName] = null;
 
         return $this;
+    }
+
+    /**
+     * @param string $fieldName
+     *
+     * @return mixed|null
+     */
+    public function getRequiredField(string $fieldName)
+    {
+        $result = null;
+        if(array_key_exists($fieldName, $this->requiredFields)) {
+            $result = $this->requiredFields[$fieldName];
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param array $translationServiceRecord
+     */
+    public function fillRequiredFields(array $translationServiceRecord): void
+    {
+        foreach($this->requiredFields as $fieldName => &$value) {
+            $value = $translationServiceRecord[$fieldName] ?? null;
+        }
     }
 
 }

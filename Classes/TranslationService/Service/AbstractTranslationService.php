@@ -7,6 +7,7 @@ namespace Beflo\T3Translator\TranslationService\Service;
 use Beflo\T3Translator\Authentication\AuthenticationRegistry;
 use Beflo\T3Translator\Authentication\Service\BasicAuthentication;
 use Beflo\T3Translator\Domain\Model\Dto\AuthenticationMeta;
+use Beflo\T3Translator\Exception\AuthenticationNotFoundException;
 use Beflo\T3Translator\TranslationService\TranslationServiceInterface;
 use Beflo\T3Translator\TranslationService\TranslationValue;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -23,6 +24,11 @@ abstract class AbstractTranslationService implements TranslationServiceInterface
     ];
 
     /**
+     * @var AuthenticationMeta
+     */
+    protected $authenticationMeta;
+
+    /**
      * AbstractTranslationService constructor.
      */
     public function __construct()
@@ -36,6 +42,28 @@ abstract class AbstractTranslationService implements TranslationServiceInterface
     protected function initialize(): void
     {
 
+    }
+
+    /**
+     * @param array $record
+     *
+     * @return $this|TranslationServiceInterface
+     *
+     * @throws AuthenticationNotFoundException
+     */
+    public function initializeRecord(array $record): TranslationServiceInterface
+    {
+        /** @var AuthenticationRegistry $authenticationRegistry */
+        $authenticationRegistry = GeneralUtility::makeInstance(AuthenticationRegistry::class);
+        $this->authenticationMeta = $authenticationRegistry->getAuthentication($record['authentication_type']);
+        if (!($this->authenticationMeta instanceof AuthenticationMeta)) {
+            throw new AuthenticationNotFoundException(
+                sprintf('Could not found an authentication service with the identifier "%s"!', $record['authentication_type'])
+            );
+        }
+        $this->authenticationMeta->getObject()->fillRequiredFields($record);
+
+        return $this;
     }
 
     /**
