@@ -11,7 +11,7 @@
         "typo3/cms-fluid-styled-content": "^10.2",
         "ext-json": "*"
     },
-    "version": "1.0.1",
+    "version": "1.0.2",
     "autoload": {
         "psr-4": {
             "Beflo\\T3Translator\\": "Classes/"
