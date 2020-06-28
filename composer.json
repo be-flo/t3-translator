@@ -2,7 +2,7 @@
     "name": "beflo/t3-translator",
     "type": "typo3-cms-extension",
     "description": "TYPO3 translator extension",
-    "homepage": "https://hapsoft.de",
+    "homepage": "https://t3tech.de",
     "license": ["GPL-2.0-or-later"],
     "keywords": ["TYPO3 CMS"],
     "require": {
@@ -11,6 +11,7 @@
         "typo3/cms-fluid-styled-content": "^10.2",
         "ext-json": "*"
     },
+    "version": "1.0.1",
     "autoload": {
         "psr-4": {
             "Beflo\\T3Translator\\": "Classes/"
